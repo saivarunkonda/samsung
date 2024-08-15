@@ -1,0 +1,365 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{multirow,booktabs}
+\usepackage{fullpage}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{cite}
+\fancyhf{} % Clear header and footer
+\renewcommand{\headrulewidth}{0pt}
+\rfoot{\thepage} % Page number on the right footer
+\usepackage{needspace}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing, positioning}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{cancel}
+\usepackage[margin=3cm]{geometry}
+\usepackage{empheq}
+\usepackage{framed}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{tocloft}
+\setlength{\cftbeforesecskip}{0.05in} % Adjust the spacing before section entries
+\colorlet{shadecolor}{orange!15}
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+\geometry{margin=1in, headsep=0.25in}
+\usetikzlibrary{shapes.geometric, arrows}
+
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=red!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                  NEW COMMANDS
+
+\newcommand{\defn}[2]{%
+\begin{center}
+    \fbox{\parbox{#2\linewidth}{#1}}%
+\end{center}
+}
+\newcommand{\note}[1]{%
+    \begin{tikzpicture}
+        \node[draw, decorate, decoration={random steps, segment length=2pt, amplitude=1pt}, inner sep=5pt, text width=\linewidth-10pt] (box) {#1};
+    \end{tikzpicture}%
+}
+
+\newcommand{\Pn}[1]{\mathbb{P}_{#1}(\mathbb{R})}
+
+\newcommand{\foralll}{\text{ }\forall\text{ }}
+
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\W}{\mathbf{W}}
+\newcommand{\I}{\mathbf{I}}
+\newcommand{\A}{\mathbf{A}}
+\newcommand{\B}{\mathbf{B}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\s}{\mathbf{S}}
+\newcommand{\D}{\mathbf{D}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\Span}[1]{\mathbb{L}(#1)}
+
+\newcommand{\heading}[1]{\underline{\textbf{#1}}}
+
+\newcommand{\image}[3]{\begin{figure}[H]
+    \centering
+    \includegraphics[width= #3 \textwidth]{#1}
+    \caption{ #2 }
+    \label{#2}
+\end{figure}}
+
+\newcommand{\frr}{f\colon \R^n \to \R}
+
+\newtcolorbox{mybox}{
+    colback=blue!5!white,  % Background color
+    colframe=blue!75!black,  % Border color
+    fonttitle=\bfseries,  % Title font
+    title=My Box,  % Title text
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                               CODE STYLES
+
+\lstdefinestyle{customR}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=R,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily\color{black},
+  keywordstyle=\bfseries\color{blue!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{black},
+  stringstyle=\color{teal},
+}
+
+\lstdefinestyle{customC}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=C,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily\color{black},
+  keywordstyle=\bfseries\color{blue},
+  commentstyle=\itshape\color{green!60!black},
+  identifierstyle=\color{black},
+  stringstyle=\color{orange},
+}
+
+\lstdefinestyle{customPython}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=Python,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily\color{black},
+  keywordstyle=\bfseries\color{blue},
+  commentstyle=\itshape\color{green!60!black},
+  identifierstyle=\color{black},
+  stringstyle=\color{red},
+}
+
+\lstset{style=customR} % Default to R style
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% If it is a new concept, create a section
+% If it is a subsection just structuring the section, then use the subsection.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={Document Title},
+    pdfpagemode=FullScreen,
+}
+
+\title{One Step Diffusion Model using Distillation techniques for text-to-image generation tasks}
+\author{ Anumaneni Venkat Balachandra 
+        \and Sravya D
+        \and Shreyashwini R
+        \and Sai Varun Konda}
+\date{\today} % Empty by default, type \today as parameter if needed
+
+\begin{document}
+\pagenumbering{gobble} % Suppress page numbering
+
+% Ensure empty page style for title page
+\maketitle
+\thispagestyle{empty}
+
+\tableofcontents
+
+\newpage
+
+\pagenumbering{arabic} % Start page numbering from 1
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Your content goes here
+
+\section{Problem Statement Breakdown}
+
+\subsection{Text-to-Image Generation Tasks}
+
+\textbf{Definition}: This involves generating images from textual descriptions. For example, given the text \textit{"a sunset over a mountain range,"} the model would generate an image that depicts this scene.
+
+\textbf{Applications}: This has applications in art generation, creating visual content for stories or games, and even assisting in designing scenes from descriptions.
+
+\subsection{Diffusion Models}
+
+\textbf{Definition}: Diffusion models are a class of generative models that learn to generate data by iteratively adding noise and then removing it.
+
+\textbf{Process}: These models start with a simple distribution (like Gaussian noise) and learn to gradually denoise it to generate complex data structures like images.
+
+\textbf{Key Insight}: The process is inspired by physical diffusion processes where particles move from high concentration to low concentration areas.
+
+\subsection{One Step Diffusion Model}
+
+\textbf{Simplification}: Traditional diffusion models operate in multiple steps, iteratively refining the image. A one-step diffusion model aims to accomplish this in a single step, making the process faster.
+
+\textbf{Challenge}: Achieving high-quality image generation in just one step is challenging because it requires the model to capture and reproduce intricate details of the image all at once.
+
+\subsection{Distillation Techniques}
+
+\textbf{Definition}: Distillation is a technique where a larger, complex model (teacher) trains a smaller, more efficient model (student).
+
+\textbf{Process}: The smaller model learns to mimic the behavior of the larger model, effectively capturing its knowledge and performance but with reduced computational requirements.
+
+\textbf{Application in Diffusion Models}: In this context, a large, multi-step diffusion model could be used to train a one-step diffusion model, distilling its knowledge into a more efficient form.
+
+
+\subsection{Steps Involved}:
+
+\begin{enumerate}
+    \item \textbf{Training a Multi-Step Diffusion Model}: Start with a multi-step diffusion model that can generate high-quality images from text descriptions.
+    \item \textbf{Distilling the Model}: Use distillation techniques to train a one-step diffusion model that can replicate the multi-step model's performance.
+    \item \textbf{Optimization and Evaluation}: Optimize the one-step model for efficiency and evaluate its performance in terms of image quality and generation speed.
+\end{enumerate}
+
+\subsection{Summary}
+
+The project aims to simplify the process of generating images from text by developing an efficient model that can perform this task in a single step. This involves using advanced machine learning techniques, including diffusion models and model distillation, to achieve high-quality results with reduced computational resources.
+
+\subsection{Diffusion Models vs GANs}
+\subsection{Generative Adversarial Networks (GANs)}
+\begin{itemize}
+    \item \textbf{Components}: GANs consist of two neural networks: a Generator and a Discriminator. The Generator tries to create realistic data (e.g., images), while the Discriminator tries to distinguish between real and generated data.
+    \item \textbf{Training}: GANs are trained in a competitive manner. The Generator aims to fool the Discriminator, while the Discriminator aims to accurately classify real vs. generated data. This results in a min-max optimization problem.
+    \item \textbf{Applications}: GANs are widely used in image generation, style transfer, image super-resolution, and other generative tasks.
+\end{itemize}
+
+\subsection{Diffusion Models}
+\begin{itemize}
+    \item \textbf{Process}: Diffusion models generate data by iteratively adding noise to the data (forward process) and then learning to remove this noise to retrieve the original data (reverse process). The goal is to learn a denoising process that can transform random noise into realistic data.
+    \item \textbf{Training}: The model is trained to reverse the diffusion process, which typically involves multiple steps. However, the project you're asking about aims to achieve this in a single step using distillation techniques.
+    \item \textbf{Applications}: Diffusion models are used in similar generative tasks as GANs, including image generation, but they are also applied in other areas such as molecular generation and speech synthesis.
+\end{itemize}
+
+\subsection{Key Differences}
+\begin{itemize}
+    \item \textbf{Architecture and Training}: GANs rely on the adversarial training of two networks, while diffusion models use a denoising process. This leads to different challenges and techniques in training and model architecture.
+    \item \textbf{Generation Process}: GANs generate images in a single pass through the Generator. Traditional diffusion models use a multi-step denoising process, though the project aims to reduce this to a single step.
+    \item \textbf{Stability and Quality}: GANs can be difficult to train due to issues like mode collapse and instability. Diffusion models, on the other hand, can be more stable but are typically slower due to the iterative process.
+\end{itemize}
+
+\subsection{How It Relates}
+While the project on diffusion models does not directly involve GANs, it shares the same high-level goal of generating realistic images. Both approaches belong to the broader field of generative models in machine learning. Understanding GANs can provide useful context and insights into generative tasks, but the specific techniques and methodologies differ between GANs and diffusion models.
+
+% If you want to dive deeper into how diffusion models work or how they compare to GANs in more technical detail, let me know!
+
+% \section{Resources to learn about diffusion models}
+% \subsection{Reddit threads}
+% \begin{itemize}
+%     \item \href{https://www.reddit.com/r/MachineLearning/comments/zp6ll4/d_resources_to_learn_and_fully_understand/}{first}
+%     \item \href{https://www.reddit.com/r/MachineLearning/comments/uo48sb/d_introduction_to_diffusion_models/}{second}
+%     \item \href{https://www.reddit.com/r/learnmachinelearning/comments/16784yx/i_went_from_not_knowing_anything_about_diffusion/}{third}
+%     \item \href{https://www.reddit.com/r/MachineLearning/comments/xicr62/d_resources_to_understand_diffusion_models/}{fourth}
+% \end{itemize}
+
+% \subsection{GitHub repos}
+% \begin{itemize}
+%     \item https://github.com/huggingface/diffusion-models-class#prerequisites
+% \end{itemize}
+
+% \subsection{Websites}
+% \begin{itemize}
+%     \item https://diff-usion.github.io/Awesome-Diffusion-Models/
+% \end{itemize}
+
+\section{Literature review}
+\begin{enumerate}
+    \item \textbf{UFOGen}\cite{xu2024ufogen} 
+    \begin{itemize}
+        \item generative model designed for ultra-fast, one-step text-to-image generation
+        \item n. In contrast to conventional approaches that focus on employing distillation techniques for diffusion models, UFOGen adopts a hybrid methodology, integrating diffusion models with a GAN objective.
+    \end{itemize}
+    \item \textbf{MobileDiffusion}\cite{zhao2024mobilediffusioninstanttexttoimagegeneration} 
+    \begin{itemize}
+        \item  ultra-efficient
+text-to-image diffusion model obtained through extensive optimizations
+in both architecture and sampling techniques.
+\item obtained a highly optimized architecture for diffusion UNet, with less than
+400 million parameters and more efficient computational operations
+\item adversarial fine-tuning techniques
+and provide the best recipe for one-step diffusion sampling are studied
+\item able to achieve the inference time of 0.2 seconds
+on mobile devices.
+    \end{itemize}
+\item \textbf{Adversarial Diffusion } \cite{sauer2023adversarialdiffusiondistillation}
+\begin{itemize}
+    \item efficiently samples large-scale
+foundational image diffusion models in just 1–4 steps while
+maintaining high image quality
+\item  use score distillation
+to leverage large-scale off-the-shelf image diffusion models
+as a teacher signal in combination with an adversarial loss
+to ensure high image fidelity even in the low-step regime
+of one or two sampling steps
+\item reaches the
+performance of state-of-the-art diffusion models (SDXL) in
+only four steps
+
+\end{itemize}
+\item \textbf{InstaFlow} \cite{liu2024instaflowstephighqualitydiffusionbased}
+\begin{itemize}
+    \item explores a recent method called Rectified Flow which, thus far, has only been applied to small datasets
+    \item rectified flow facilitates the distillation process with student models.
+    \item text-conditioned pipeline
+to turn Stable Diffusion (SD) into an ultra-fast one-step model
+\end{itemize}
+
+\item \textbf{SwiftBrush}\cite{nguyen2024swiftbrushonesteptexttoimagediffusion}
+\begin{itemize}
+    \item  previous distillation
+methods fail to retain the generation quality while requiring a significant amount of images for training, either from
+real data or synthetically generated by the teacher model.
+\item without
+reliance on any training image data
+\item Drawing inspiration from text-to-3D synthesis, in which a 3D neural radiance field that aligns with the input prompt can be obtained
+from a 2D text-to-image diffusion prior
+\end{itemize}
+
+\item \textbf{You Only Sample Once}\cite{luo2024sampleoncetamingonestep}
+\begin{itemize}
+    \item YOSO integrates the diffusion process with GANs to achieve the best of two worlds. 
+    \item smooth the distribution by the denoising generator itself, performing self-cooperative learning.
+    \item can generate images in one step trained on 512 resolution, with the capability of adapting to 1024 resolution without extra explicit training
+\end{itemize}
+
+\item \textbf{Distribution Matching Distillation}\cite{yin2023onestepdiffusiondistributionmatching}
+\begin{itemize}
+    \item enforce the one-step image generator match the diffusion model at distribution level, by minimizing an approximate KL divergence whose gradient can be expressed as the difference between 2 score functions
+    \item Combined with a simple regression loss matching the large-scale structure of the multi-step diffusion outputs, this method outperforms all published few-step diffusion approaches
+\end{itemize}
+
+\item \textbf{EM Distillation} \cite{xie2024emdistillationonestepdiffusion}
+\begin{itemize}
+    \item Existing distillation methods enable efficient sampling, but have notable limitations
+    \begin{itemize}
+        \item performance degradation with very few sampling steps
+        \item reliance on training data access
+        \item mode-seeking optimization that may fail to capture the full distribution
+    \end{itemize}
+    \item maximum likelihood-based approach that distills a diffusion model to a one-step generator model with minimal loss of perceptual quality
+    \item outperforms existing one-step generative methods in terms of FID scores on ImageNet-64 and ImageNet-128, and compares favorably with prior work on distilling text-to-image diffusion models.
+\end{itemize}
+
+\item \textbf{Distillation of Guided Diffusion Models}\cite{meng2023distillationguideddiffusionmodels}
+\begin{itemize}
+    \item Classifier-free guided diffusion models have been used in DALLE-2, Stable Diffusion and Imagen.
+    \item computationally expensive at inference time since they require evaluating two diffusion models, a class-conditional model and an unconditional model, tens to hundreds of times. 
+    \item we propose an approach to distilling classifier-free guided diffusion models into models that are fast to sample from
+    \item generate images visually comparable to that of the original model using as few as 4 sampling steps on ImageNet 64x64 and CIFAR-10, achieving FID/IS scores comparable to that of the original model while being up to 256 times faster to sample from
+\end{itemize}
+
+\end{enumerate}
+
+KPIs: benchmark existing techniques
+targeted mean opinion score (mos) = 0.5
+sampling steps = 1-2
+
+
+
+
+
+
+\bibliographystyle{plain}  % or another style of your choice
+\bibliography{smth}        % assuming your .bib file is named smth.bib
+
+\end{document}
